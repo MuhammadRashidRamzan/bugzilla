@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-#ruby "2.5.1"
+ruby "2.4.6"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.10'
 # Use SCSS for stylesheets
@@ -39,6 +39,8 @@ gem "select2-rails"
 gem 'pundit'
 
 gem 'paperclip', '~> 4.3', '>= 4.3.6'
+
+gem 'rails_12factor'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
