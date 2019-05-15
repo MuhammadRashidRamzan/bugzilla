@@ -1,0 +1,59 @@
+
+<div style=" width: 60%;margin: 0 auto ">
+  <h3>Edit Project</h3>
+  <div class="row">
+
+  <div class="col-sm-12">
+      <%= form_for @project, url:project_path(@project) do |f| %>
+
+       <div class="form-group">
+          <%= f.label :title   %>
+          <%= f.text_field :title , class: "form-control" , placeholder: "Enter Title" %>
+
+          <% if @project.errors.include?(:title) %>
+                <div class="alert alert-danger"><span> <%= @project.errors[:title][0]%></span></div>
+            <% end %>
+
+        </div>
+
+        <div class="form-group">
+          <%= f.label :description  %>
+          <%= f.text_field :description , class: "form-control" , placeholder: "Description"  %>
+          <% if @project.errors.include?(:description) %>
+                <div class="alert alert-danger"><span> <%= @project.errors[:description][0]%></span></div>
+            <% end %>
+
+        </div>
+
+      <div class="form-group">
+       <%= f.label :Assign_Developers  %>
+        <%= f.select :user_ids, options_for_select(devsAndQAs.collect{ |u| [u.name, u.id]},assignDevelopers(@project)),{  }, {class: 'select2 form-control', multiple: 'multiple'}%>
+      </div>
+
+      <% if current_user.role == 'admin'%>
+        <div class="form-group">
+         <%= f.label :Select_Project_Manager  %>
+          <%= f.select :user_id, options_for_select(projectManagers.collect{ |u| [u.name, u.id]},projectManager(@project) ),{  }, {class: 'select2 form-control'}%>
+        </div>
+      <% end %>
+
+       <%= f.submit class: "btn btn-primary" %>
+
+  </div>
+  </div>
+</div>
+
+<% end %>
+
+<br>
+<br>
+
+
+
+
+<script type="text/javascript">
+	$(document).ready(function() {
+    $('.select2').select2();
+
+});
+</script>

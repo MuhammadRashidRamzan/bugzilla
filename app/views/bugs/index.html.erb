@@ -1,0 +1,57 @@
+<div style="text-align: center ;width: 60%;margin: 0 auto ">
+  <h3>Project Bugs</h3>
+    <table class="table table table-hover  " style="font-size: 18px ;width: 60%">
+  <tr>
+    <th>Title </th>
+    <th>Description</th>
+    <th>Email</th>
+    <th>Name</th>
+    <th>status</th>
+    <th>Image</th>
+
+    <th>Action</th>
+
+  </tr>
+
+   <% @bugs.each do |bug| %>
+   <tr>
+    <td><%= bug.title %></td>
+    <td><%= bug.description %></td>
+     <td>
+        <% if bug.user.present?  %>
+          <%= bug.user.email %>
+        <% end%>
+    </td>
+    <td>
+        <% if bug.user.present?  %>
+          <%= bug.user.name %>
+        <% end%>
+    </td> 
+    <td><%= bug.status %></td>
+    <td>
+      <% if bug.image.present? %>
+        <%= image_tag bug.image.url(:thumb) %>
+      <% end %>
+</td>
+    
+      <td>
+
+        <% if policy(bug).manageBug %>
+          <% if policy(bug).destroy?  %>
+              <%= link_to 'Delete',  project_bug_path(@project,bug),
+              data: { confirm: 'Are you sure?' }, method: :delete  , class: "btn badge badge-danger"%>
+          
+              <% end %>
+
+          <%= link_to "Edit" , edit_project_bug_path(@project,bug)  , class: "btn badge badge-info" %> 
+      <% end %> 
+      </td>
+
+
+</td>
+
+    </tr>
+  <% end %>
+
+</table>
+</div>

@@ -1,0 +1,60 @@
+
+
+
+<div style="text-align: center ;width: 70%;margin: 0 auto ">
+  <h3>Teams</h3>
+
+  <table class="table table-hover " style="font-size: 18px;text-align: center;">
+    <tr>
+
+	  <th>Manager</th>
+      <th>Developers</th>
+      <th>Quality Assurance</th>
+      <th>Project Title </th>
+      
+    
+
+
+      
+
+    </tr>
+
+     <% @projects.each do |project| %>
+     <tr>
+
+	  <td  >
+
+          <% if !manager(project).blank? %>
+            <%= link_to manager(project).name,  managerProfile_project_path(manager(project).id) ,  class: "btn badge badge-success" %>
+          <% end %>
+
+          <% if manager(project).blank? %>
+            
+          <% end %>
+
+       </td>
+       <td>
+
+			<% devs(project).each do |dev|%>
+		 		<span class="badge badge-primary"><%= dev.name  %></span>
+			<%end %>
+
+       </td>
+       <td>
+
+       		<% qas(project).each do |qa|%>
+		 		<span class="badge badge-info"><%= qa.name  %></span>
+			<%end %>
+
+       </td>
+
+      <td><%= project.title %></td>
+      
+
+      
+     
+      </tr>
+    <% end %>
+  </table>
+</div>
+

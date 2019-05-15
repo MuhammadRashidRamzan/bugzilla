@@ -1,0 +1,53 @@
+
+
+
+<div style=" width: 60%;margin: 0 auto ">
+  <h3>Edit Bug</h3>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <%= form_for @bug, url:project_bug_path(@project,@bug) do |f| %>
+
+            <% if current_user.role == 'admin' ||  current_user.role == 'project_manager' %>
+
+         <div class="form-group">
+          <%= f.label :title   %>
+          <%= f.text_field :title , class: "form-control" , placeholder: "Enter Title" %>
+
+          <% if @bug.errors.include?(:title) %>
+                <div class="alert alert-danger"><span> <%= @bug.errors[:title][0]%></span></div>
+          <% end %>
+
+        </div>
+
+        <div class="form-group">
+          <%= f.label :description  %>
+          <%= f.text_field :description , class: "form-control" , placeholder: "Description"  %>
+          <% if @bug.errors.include?(:description) %>
+                <div class="alert alert-danger"><span> <%= @bug.errors[:description][0]%></span></div>
+          <% end %>
+
+        </div>
+
+            <%= f.hidden_field :project_id, :value => @project.id  , class: "form-control "%>
+          <div class="form-group">
+            <%= f.label :Image  %>
+            <%= f.file_field :image, value: 'bug.png',  as: :file ,class: "form-control" %>
+          </div>
+            <%= f.label :Assign_Developers  %>
+          	<%= f.select :user_id, options_for_select(projectDevsAndQAs(@project).collect{ |u| [u.email, u.id] }), {},
+          	   	{class: 'select2 form-control'}%>
+
+           	<% end %>
+           	
+            <%= f.label :status %>
+            <%= f.select :status, bugStatuses , {},{class: "form-control"} %>
+
+        <%= f.submit  class: "btn btn-primary" %>
+
+      </div>
+    </div>
+</div>
+
+
+<% end %>

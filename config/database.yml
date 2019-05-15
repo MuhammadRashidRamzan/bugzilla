@@ -1,0 +1,17 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: bug_zilla
+  pool: 5
+  username: postgres
+  password: postgres
+  port: 5432
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: bug_zilla_test
+  pool: 5
+  username: postgres
+  password: postgres
+  port: 5432

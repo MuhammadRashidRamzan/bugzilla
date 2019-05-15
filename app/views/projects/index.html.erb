@@ -1,0 +1,63 @@
+
+
+
+<div style="text-align: center ;width: 90%;margin: 0 auto ">
+  <h3>Projects</h3>
+
+  <table class="table table-hover " style="font-size: 18px;text-align: center;">
+    <tr>
+      <th>Title </th>
+      <th>Description</th>
+      <th>Bugs</th>
+      <th>Developers</th>
+      <th>Manager</th>
+
+      <th colspan="2">Action</th>
+
+    </tr>
+
+     <% @projects.each do |project| %>
+     <tr>
+      <td><%= project.title %></td>
+      <td><%= project.description %></td>
+      <td><%= project.bugs.count %></td>
+      <td><%= project.devsAndQas.count %></td>
+      <td style="color:black" >
+
+          <% if !manager(project).blank? %>
+            <%= link_to manager(project).name,  managerProfile_project_path(manager(project).id) ,  class: "btn badge badge-success" %>
+          <% end %>
+
+          <% if manager(project).blank? %>
+            
+          <% end %>
+
+        </td>
+      
+      <td >
+
+           <%= link_to "See Bugs" , project_bugs_path(project),  class: "btn badge badge-info" %>
+
+          <% if policy(Bug.new).new? && policy(project).manageProject %>
+            <%= link_to "Add Bug" , new_project_bug_path(project) , class: "btn badge badge-primary"  %>
+          <% end %>
+
+          <% if policy(project).show? %>
+            <%= link_to "View" , project_path(project) , class: "btn badge badge-primary" %>
+          <% end %>
+
+          <% if policy(project).edit?  && policy(project).manageProject %>
+            <%= link_to "Edit" , edit_project_path(project) , class: "btn badge badge-primary linktag" %>
+          <% end %>
+
+          <% if policy(project).destroy? && policy(project).manageProject %>
+            <%= link_to "Delete" , project_path(project) , method: :delete , class: "btn badge badge-danger" %>
+          <% end %>
+     
+       </td>
+
+      </tr>
+    <% end %>
+  </table>
+</div>
+
