@@ -1,7 +1,7 @@
 class RenameUsersTableColumnDescription < ActiveRecord::Migration
   def change
 
-    rename_column :users, :descrption, :description
+    rename_column :projects, :descrption, :description
   
   end
 end
