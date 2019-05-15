@@ -1,5 +1,4 @@
 class ProjectsController < ApplicationController
-
   before_action :authenticate_user!
   before_action :set_project, only: [:update,:destroy, :edit ,:show, :saveAssigns ,:assign]
   before_action :authorize_project, only: [:index, :new, :show, :destroy]
